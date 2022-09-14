@@ -71,7 +71,16 @@ public class Productsimpl implements Productintf{
 	@Override
 	public int delete(Object object) {
 		// TODO Auto-generated method stub
-		return 0;
+		Product p1= (Product) object;
+		try {
+			PreparedStatement ps=db.getConnection().prepareStatement("DELETE FROM product WHERE prdId = ?");
+			ps.setInt(1, p1.getPrdId());
+//			ps.setString(2, p1.getPrdName());
+//			ps.setDouble(3, p1.getprdPrice());
+			row=ps.executeUpdate();
+			db.closeConnection();
+					}catch(SQLException e) {e.printStackTrace();}
+		return row;
 	}
 }
 	
